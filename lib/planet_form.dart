@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'database_helper.dart';
-import 'planet.dart';
+import 'models/planeta.dart';
 
 class PlanetForm extends StatefulWidget {
   final Map<String, dynamic>? planet;
@@ -13,14 +13,18 @@ class PlanetForm extends StatefulWidget {
 
 class _PlanetFormState extends State<PlanetForm> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _nicknameController = TextEditingController();
+  final TextEditingController _distanceController = TextEditingController();
+  final TextEditingController _sizeController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.planet != null) {
       _nameController.text = widget.planet!['name'];
-      _descriptionController.text = widget.planet!['description'];
+      _nicknameController.text = widget.planet!['nickname'] ?? '';
+      _distanceController.text = widget.planet!['distance'].toString();
+      _sizeController.text = widget.planet!['size'].toString();
     }
   }
 
@@ -37,8 +41,18 @@ class _PlanetFormState extends State<PlanetForm> {
               decoration: InputDecoration(labelText: 'Planet Name'),
             ),
             TextField(
-              controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              controller: _nicknameController,
+              decoration: InputDecoration(labelText: 'Nickname'),
+            ),
+            TextField(
+              controller: _distanceController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Distance'),
+            ),
+            TextField(
+              controller: _sizeController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(labelText: 'Size'),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -46,7 +60,9 @@ class _PlanetFormState extends State<PlanetForm> {
                 // Criar um novo planeta com os dados do formulário
                 Planet planet = Planet(
                   name: _nameController.text,
-                  description: _descriptionController.text,
+                  nickname: _nicknameController.text,
+                  distance: double.parse(_distanceController.text),
+                  size: int.parse(_sizeController.text),
                 );
 
                 // Se estiver criando um novo planeta

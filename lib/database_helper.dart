@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'planet.dart';
+import 'models/planeta.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -29,7 +29,7 @@ class DatabaseHelper {
 
   // Criação da tabela
   Future _onCreate(Database db, int version) async {
-    await db.execute('''
+    await db.execute('''  
       CREATE TABLE planets(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -54,5 +54,22 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  // Método para obter todos os planetas
+  Future<List<Map<String, dynamic>>> getPlanets() async {
+    final db = await database;
+    return await db.query('planets');
+  }
+
+  // Método para excluir um planeta
+  Future<int> deletePlanet(int id) async {
+    final db = await database;
+    return await db.delete(
+      'planets', // Nome da tabela
+      where: 'id = ?', // Condição de exclusão
+      whereArgs: [id], // Argumento para o id do planeta
+    );
+  }
 }
+
 

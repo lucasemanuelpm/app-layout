@@ -50,7 +50,7 @@ class _PlanetListScreenState extends State<PlanetListScreen> {
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PlanetFormScreen(planet: planet),
+                        builder: (context) => PlanetForm(planet: planet), // Removido 'const'
                       ),
                     );
                     _refreshPlanetList();
@@ -70,7 +70,7 @@ class _PlanetListScreenState extends State<PlanetListScreen> {
         onPressed: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PlanetFormScreen()),
+            MaterialPageRoute(builder: (context) => PlanetForm()), // Removido 'const'
           );
           _refreshPlanetList();
         },
@@ -78,3 +78,5 @@ class _PlanetListScreenState extends State<PlanetListScreen> {
     );
   }
 }
+
+
