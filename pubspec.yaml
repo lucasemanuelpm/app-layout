@@ -1,3 +1,18 @@
+name: myapp
+description: A new Flutter project
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"  # Ajuste para a versão que você usa
+
 dependencies:
-  sqflite: ^2.0.0+4 # Verifique a última versão estável no pub.dev
+  flutter:
+    sdk: flutter
+  sqflite: ^2.0.0+4
   path: ^1.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
